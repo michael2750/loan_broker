@@ -8,8 +8,8 @@ app = Flask(__name__)
 def get_request():
 	json_string = request.get_json()
 	ssn = json_string['ssn']
-	loan_amount = json_string['loanAmount']
-	loan_duration = json_string['loanDuration']
+	loan_amount = json_string['loan_amount']
+	loan_duration = json_string['loan_duration']
 	request_id = insert_request(ssn, loan_amount, loan_duration)
 	return str(request_id)
 
