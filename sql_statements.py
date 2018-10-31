@@ -26,8 +26,8 @@ def insert_request(request_ssn, request_loan_amount, request_loan_duration):
 		INSERT INTO
 			requests(
 				ssn,
-				loanAmount,
-				loanDuration
+				loan_amount,
+				loan_duration
 				)
 			VALUES(
 				:request_ssn,
