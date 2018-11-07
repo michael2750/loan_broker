@@ -20,20 +20,19 @@ body = [
 
 
 @app.route('/request', methods=['POST'])
-def request():
+def get_request():
 	json_string = request.get_json()
 	ssn = json_string['ssn']
 	interest_rate = calc_interest_rate(json_string)
 	data = {'ssn': ssn, 'interest_rate': interest_rate}
-	return data
+	return json.dumps(data)
 
 
 def calc_interest_rate(body):
-	data = json.loads(body)
-	credit_score = data['creditScore']
-	loan_amount = data['loanAmount']
-	loan_duration = data['loanDuration']
-	print(data)
+	credit_score = body['creditScore']
+	loan_amount = body['loanAmount']
+	loan_duration = body['loanDuration']
+	print(body)
 	if loan_amount > 1000000:
 		interest_rate = 1
 	else:

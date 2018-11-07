@@ -20,7 +20,6 @@ def callback(ch, method, properties, body):
 	interest_rate = calc_interest_rate(body)
 	ssn = json.loads(body)['ssn']
 	data = {'ssn': ssn, 'interest_rate': interest_rate}
-	print(data)
 	return data
 
 def calc_interest_rate(body):
