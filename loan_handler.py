@@ -2,6 +2,7 @@ from flask import Flask
 from flask import request
 from sql_statements import insert_request, select_result
 import json
+import pika
 
 app = Flask(__name__)
 
