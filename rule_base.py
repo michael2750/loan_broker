@@ -9,9 +9,9 @@ channel = connection.channel()
 channel.queue_declare(queue='rule_base')
 
 def callback(ch, method, properties, body):
-	url = "localhost:5004/rule_base"
-	data = {'credit_score': body['credit_score']}
-	headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+	json_string = json.loads(body)
+	credit_score = json_string["credit_score"]
+	req = requests.get("http://localhost:8000/say_hello?creditscore="+credit_score)
 	
 
 	req = requests.get(url, data=json.loads(data),headers=headers)
