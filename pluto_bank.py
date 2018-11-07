@@ -7,6 +7,8 @@ channel = connection.channel()
 
 def declare_queue():
 	channel.queue_declare(queue='loan_request')
+	channel.queue_declare(queue='loan_receiver')
+
 
 def consumer():
 	channel.basic_consume(callback,
@@ -20,7 +22,11 @@ def callback(ch, method, properties, body):
 	interest_rate = calc_interest_rate(body)
 	ssn = json.loads(body)['ssn']
 	data = {'ssn': ssn, 'interest_rate': interest_rate}
-	return data
+	json_string = json.dumps(data)
+	channel.basic_publish(exchange='',
+						routing_key='loan_receiver',
+						body=json_string)
+	print(" [x] Sent", json_string)
 
 def calc_interest_rate(body):
 	data = json.loads(body)
@@ -38,4 +44,5 @@ def calc_interest_rate(body):
 
 if __name__ == '__main__':
 	declare_queue()
-	consumer()
+	data = consumer()
+	send_interest_rate(data)
