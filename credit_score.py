@@ -10,8 +10,8 @@ channel = connection.channel()
 channel.queue_declare(queue='credit_score')
 
 def callback(ch, method, properties, body):
-    print(" [x] Received %r" % body)
-    body = json.loads(body)
+	print(" [x] Received %r" % body)
+	body = json.loads(body)
 	wsdl = 'http://datdb.cphbusiness.dk:8080/CreditScoreService/CreditScoreService?wsdl'
 	client = zeep.Client(wsdl=wsdl)
 	print(client.service.creditScore(body[ssn]))
