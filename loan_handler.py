@@ -22,23 +22,14 @@ def get_result():
 	else:
 		return "under progress"
 
-@app.route('/rule_base', methods=['GET'])
-def get_rule_base():
-	json_string = request.get_json('credit_score')
-	credit_score = json_string['credit_score']
-	bank_list = []
-	if credit_score > 600:
-		bank_list.append("Danskebank")
-	if credit_score > 400:
-		bank_list.append("Amagerbanken")
-	if credit_score > 200:
-		bank_list.append("Nordea")
-	if credit_score > 200:
-		bank_list.append("Banknordic")
-
-	data = {"banks": bank_list}
-
-	return str(data)
+def start_process(ssn, loan_amount, loan_duration):
+    connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
+    channel = connection.channel()
+    body = {"ssn": ssn, "loan_amount": loan_amount, "loan_duration": loan_duration}
+    channel.basic_publish(exchange='',
+                          routing_key='credit_score',
+                          body=json.dumps(body))
+    connection.close()
 
 if __name__ == '__main__':
 	app.run(debug=True,host="0.0.0.0", port=5004)
