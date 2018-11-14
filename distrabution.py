@@ -27,7 +27,7 @@ class FibonacciRpcClient(object):
 
     def call(self, n):
         self.response = None
-        self.channel.basic_publish(exchange='cphbusiness.bankJSON',
+        self.channel.basic_publish(exchange='cphbusiness.bankXML',
                                    routing_key='',
                                    properties=pika.BasicProperties(
                                          reply_to = self.callback_queue
@@ -77,11 +77,11 @@ def callback(ch, method, properties, body):
 	print(json.dumps(json_string))
 	for bank in json_string["banks"]:
 		if bank == "Amagerbanken":
-			bankXML(json_string)
+			pass
 		if bank == "Nordea":
 			pass
 		if bank == "Banknordic":
-			pass
+			bankXML(json_string)
 		if bank == "Danskebank":
 			pass
 	
