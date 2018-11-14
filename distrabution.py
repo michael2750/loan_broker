@@ -45,6 +45,7 @@ channel = connection.channel()
 channel.queue_declare(queue='distrabution')
 
 def bankXML(json_string):
+	fibonacci_rpc = FibonacciRpcClient()
 	response = fibonacci_rpc.call(f"""<LoanRequest>
 							<ssn>{ssn}</ssn>
 							<creditScore>{cs}</creditScore>
