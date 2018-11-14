@@ -12,13 +12,13 @@ class HelloWorldService(ServiceBase):
     	print("Penis")
     	credit_score = creditscore
     	bank_list = []
-    	if credit_score > 600:
+    	if credit_score > 500:
     		bank_list.append("Danskebank")
-    	if credit_score > 400:
+    	if credit_score > 300:
     		bank_list.append("Amagerbanken")
-    	if credit_score > 200:
+    	if credit_score > 150:
     		bank_list.append("Nordea")
-    	if credit_score > 200:
+    	if credit_score > 0:
     		bank_list.append("Banknordic")
     	data = {"banks": bank_list}
     	return data
