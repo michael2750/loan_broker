@@ -9,7 +9,6 @@ def declare_queue():
 	channel.queue_declare(queue='loan_request')
 	channel.queue_declare(queue='loan_receiver')
 
-
 def consumer():
 	channel.basic_consume(callback,
 	            			queue='loan_request',
