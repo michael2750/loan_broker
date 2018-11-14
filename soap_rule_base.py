@@ -9,7 +9,6 @@ import json
 class HelloWorldService(ServiceBase):
     @rpc(UnsignedInteger, _returns=String)
     def say_hello(ctx, creditscore):
-    	print("Penis")
     	credit_score = creditscore
     	bank_list = []
     	if credit_score > 500:

@@ -18,7 +18,6 @@ body = [
     }
 ]
 
-
 @app.route('/request', methods=['POST'])
 def get_request():
 	json_string = request.get_json()
