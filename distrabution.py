@@ -45,7 +45,7 @@ channel = connection.channel()
 channel.queue_declare(queue='distrabution')
 
 def bankXML(json_string):
-	ssn = json_string["ssn"]
+	ssn = json_string["ssn"].replace("-","")[:-2]
 	cs = json_string["credit_score"]
 	loan_amount = json_string["loan_amount"]
 	duration = datetime.datetime.now() + datetime.timedelta(days=json_string["loan_duration"])
@@ -57,18 +57,6 @@ def bankXML(json_string):
 							<loanDuration>{duration}</loanDuration>
 							</LoanRequest>""")
 	print(" [.] Got %r" % response)
-
-	
-
-	
-	channel.basic_publish(exchange='cphbusiness.bankXML',
-						routing_key='',
-						body=f"""<LoanRequest>
-							<ssn>{ssn}</ssn>
-							<creditScore>{cs}</creditScore>
-							<loanAmount>{loan_amount}</loanAmount>
-							<loanDuration>{duration}</loanDuration>
-							</LoanRequest>""")
 
 # 1973-01-01 01:00:00.0 CET
 
