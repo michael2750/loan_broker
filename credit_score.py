@@ -14,7 +14,13 @@ def callback(ch, method, properties, body):
 	body = json.loads(body)
 	wsdl = 'http://datdb.cphbusiness.dk:8080/CreditScoreService/CreditScoreService?wsdl'
 	client = zeep.Client(wsdl=wsdl)
-	print(client.service.creditScore(body["ssn"]))
+	credit_score = client.service.creditScore(body["ssn"])
+	print(credit_score)
+	body["credit_score"] = credit_score
+	channel.basic_publish(exchange='',
+	                      routing_key='rule_base',
+	                      body=json.dumps(body))
+
 
 channel.basic_consume(callback,
                       queue='credit_score',

@@ -1,6 +1,8 @@
 from flask import Flask
 from flask import request
 from sql_statements import insert_request, select_result
+import pika
+import json
 
 app = Flask(__name__)
 
@@ -11,6 +13,7 @@ def get_request():
 	loan_amount = json_string['loan_amount']
 	loan_duration = json_string['loan_duration']
 	request_id = insert_request(ssn, loan_amount, loan_duration)
+	start_process(ssn, loan_amount, loan_duration)
 	return str(request_id)
 
 @app.route('/result', methods=['GET'])

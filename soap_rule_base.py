@@ -4,6 +4,7 @@ from spyne.protocol.json import JsonDocument
 from spyne.protocol.http import HttpRpc
 from spyne.server.wsgi import WsgiApplication
 import logging
+import json
 
 class HelloWorldService(ServiceBase):
     @rpc(UnsignedInteger, _returns=String)
@@ -20,7 +21,7 @@ class HelloWorldService(ServiceBase):
     	if credit_score > 0:
     		bank_list.append("Banknordic")
     	data = {"banks": bank_list}
-    	return str(data)
+    	return data
 
 if __name__ == '__main__':
     from wsgiref.simple_server import make_server
