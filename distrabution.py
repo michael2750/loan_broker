@@ -54,8 +54,8 @@ def bankXML(json_string):
 							<ssn>{ssn}</ssn>
 							<creditScore>{cs}</creditScore>
 							<loanAmount>{loan_amount}</loanAmount>
-							<loanDuration>""" + duration + """</loanDuration>
-							</LoanRequest>""")
+							<loanDuration>{duration}</loanDuration>
+							</LoanRequest>""".replace('"', ""))
 	print(" [.] Got %r" % response)
 
 # 1973-01-01 01:00:00.0 CET
