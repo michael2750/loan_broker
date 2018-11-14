@@ -1,8 +1,6 @@
 from flask import Flask
 from flask import request
 from sql_statements import insert_request, select_result
-import json
-import pika
 
 app = Flask(__name__)
 
@@ -12,9 +10,8 @@ def get_request():
 	ssn = json_string['ssn']
 	loan_amount = json_string['loan_amount']
 	loan_duration = json_string['loan_duration']
-	#request_id = insert_request(ssn, loan_amount, loan_duration)
-	start_process(ssn, loan_amount, loan_duration)
-	return "test"#str(request_id)
+	request_id = insert_request(ssn, loan_amount, loan_duration)
+	return str(request_id)
 
 @app.route('/result', methods=['GET'])
 def get_result():
@@ -26,15 +23,13 @@ def get_result():
 		return "under progress"
 
 def start_process(ssn, loan_amount, loan_duration):
-	connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
-	channel = connection.channel()
-	body = {"ssn": ssn, "loan_amount": loan_amount, "loan_duration": loan_duration}
-	channel.basic_publish(exchange='',
-	                      routing_key='credit_score',
-	                      body=json.dumps(body))
-
-	connection.close()
-
+    connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
+    channel = connection.channel()
+    body = {"ssn": ssn, "loan_amount": loan_amount, "loan_duration": loan_duration}
+    channel.basic_publish(exchange='',
+                          routing_key='credit_score',
+                          body=json.dumps(body))
+    connection.close()
 
 if __name__ == '__main__':
 	app.run(debug=True,host="0.0.0.0", port=5004)
