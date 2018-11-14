@@ -84,9 +84,6 @@ def callback(ch, method, properties, body):
 			pass
 		if bank == "Danskebank":
 			pass
-	channel.basic_publish(exchange='',
-                      routing_key='distrabution',
-                      body=json.dumps(json_string))
 	
 
 channel.basic_consume(callback,
