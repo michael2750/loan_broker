@@ -48,14 +48,14 @@ def bankXML(json_string):
 	ssn = json_string["ssn"].replace("-","")[:-2]
 	cs = json_string["credit_score"]
 	loan_amount = json_string["loan_amount"]
-	duration = (datetime.datetime.now() + datetime.timedelta(days=json_string["loan_duration"])).strftime("%Y-%m-%d %H:%M:%S.%f")[:-5]
+	duration = (datetime.datetime.now() + datetime.timedelta(days=json_string["loan_duration"])).strftime("%Y-%m-%d %H:%M:%S")
 	fibonacci_rpc = FibonacciRpcClient()
 	response = fibonacci_rpc.call(f"""<LoanRequest>
 							<ssn>{ssn}</ssn>
 							<creditScore>{cs}</creditScore>
 							<loanAmount>{loan_amount}</loanAmount>
-							<loanDuration>{duration}</loanDuration>
-							</LoanRequest>""".replace('"', ""))
+							<loanDuration>{duration}.0</loanDuration>
+							</LoanRequest>""")
 	print(" [.] Got %r" % response)
 
 # 1973-01-01 01:00:00.0 CET
