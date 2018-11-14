@@ -45,6 +45,10 @@ channel = connection.channel()
 channel.queue_declare(queue='distrabution')
 
 def bankXML(json_string):
+	ssn = json_string["ssn"]
+	cs = json_string["credit_score"]
+	loan_amount = json_string["loan_amount"]
+	duration = datetime.datetime.now() + datetime.timedelta(days=json_string["loan_duration"])
 	fibonacci_rpc = FibonacciRpcClient()
 	response = fibonacci_rpc.call(f"""<LoanRequest>
 							<ssn>{ssn}</ssn>
@@ -56,10 +60,7 @@ def bankXML(json_string):
 
 	
 
-	ssn = json_string["ssn"]
-	cs = json_string["credit_score"]
-	loan_amount = json_string["loan_amount"]
-	duration = datetime.datetime.now() + datetime.timedelta(days=json_string["loan_duration"])
+	
 	channel.basic_publish(exchange='cphbusiness.bankXML',
 						routing_key='',
 						body=f"""<LoanRequest>
