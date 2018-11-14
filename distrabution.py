@@ -39,7 +39,7 @@ def callback(ch, method, properties, body):
 		if bank == "Amagerbanken":
 			bankXML(json_string)
 		if bank == "Nordea":
-			
+			pass
 		if bank == "Banknordic":
 			pass
 		if bank == "Danskebank":
