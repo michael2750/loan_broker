@@ -28,9 +28,9 @@ def get_request():
 
 
 def calc_interest_rate(body):
-	credit_score = body['creditScore']
-	loan_amount = body['loanAmount']
-	loan_duration = body['loanDuration']
+	credit_score = body['credit_score']
+	loan_amount = body['loan_amount']
+	loan_duration = body['loan_duration']
 	print(body)
 	if loan_amount > 1000000:
 		interest_rate = 1
