@@ -104,7 +104,7 @@ def callback(ch, method, properties, body):
 	print(json.dumps(json_string))
 	for bank in json_string["banks"]:
 		if bank == "Amagerbanken":
-			pass
+			requests.post(url = "http://159.65.116.24:5000/request", data = json_string)
 		if bank == "Nordea":
 			pluto_bank(json_string)
 		if bank == "Banknordic":
