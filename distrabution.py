@@ -132,7 +132,9 @@ def pluto_bank(json_string):
     print(" PLUTOBANK [.] Got %r" % response)
 
 def bankJSON(json_string):
-
+    bank_json = BankJSON()
+    response = bank_json.call(json_string)
+    print(" BANKJSON [.] Got %r" % response)
 
 def callback(ch, method, properties, body):
 	json_string = json.loads(body)
