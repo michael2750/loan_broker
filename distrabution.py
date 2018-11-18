@@ -147,7 +147,9 @@ def bank_json(json_string):
 def callback(ch, method, properties, body):
 	json_string = json.loads(body)
 	print(json.dumps(json_string))
+    count = 1
 	for bank in json_string["banks"]:
+        print(count)
 		if bank == "Amagerbanken":
 			requests.post(url = "http://159.65.116.24:5000/request", json = json_string)
 		if bank == "Nordea":
@@ -156,6 +158,8 @@ def callback(ch, method, properties, body):
 			bankXML(json_string)
 		if bank == "Danskebank":
 			bank_json(json_string)
+
+        count += 1
 	
 
 channel.basic_consume(callback,
