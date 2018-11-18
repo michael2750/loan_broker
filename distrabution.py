@@ -67,7 +67,7 @@ class PlutoBank(object):
                                    properties=pika.BasicProperties(
                                          reply_to = self.callback_queue
                                          ),
-                                   body=str(n))
+                                   body=json.dumps(n))
         while self.response is None:
             self.connection.process_data_events()
         return self.response
@@ -104,7 +104,7 @@ def callback(ch, method, properties, body):
 	print(json.dumps(json_string))
 	for bank in json_string["banks"]:
 		if bank == "Amagerbanken":
-			requests.post(url = "http://159.65.116.24:5000/request", data = json_string)
+			requests.post(url = "http://159.65.116.24:5000/request", json = json_string)
 		if bank == "Nordea":
 			pluto_bank(json_string)
 		if bank == "Banknordic":
