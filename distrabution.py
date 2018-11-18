@@ -59,15 +59,15 @@ def callback(ch, method, properties, body):
         if bank == "Nordea":
             channel.basic_publish(exchange='',
                           routing_key='bank_pluto_translator',
-                          body=json.dumps(body))
+                          body=json.dumps(json_string))
         if bank == "Banknordic":
             channel.basic_publish(exchange='',
                           routing_key='bankXML_translator',
-                          body=json.dumps(body))
+                          body=json.dumps(json_string))
         if bank == "Danskebank":
             channel.basic_publish(exchange='',
                           routing_key='bankJSON_translator',
-                          body=json.dumps(body))
+                          body=json.dumps(json_string))
 
         print(count)
         count += 1
