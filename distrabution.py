@@ -136,7 +136,7 @@ def bank_json(json_string):
     new_json_string["ssn"] = json_string["ssn"].replace("-","")
     new_json_string["loanAmount"] = float(json_string["loan_amount"])
     new_json_string["loanDuration"] = json_string["loan_duration"]
-    new_json_string["rki"] = False
+    #new_json_string["rki"] = False
     bank_json = BankJSON()
     response = bank_json.call(new_json_string)
     print(" BANKJSON [.] Got %r" % response)
