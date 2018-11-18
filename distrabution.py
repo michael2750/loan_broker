@@ -132,6 +132,7 @@ def pluto_bank(json_string):
     print(" PLUTOBANK [.] Got %r" % response)
 
 def bank_json(json_string):
+    new_json_string = {}
     new_json_string["ssn"] = json_string["ssn"].replace("-","")
     new_json_string["loanAmount"] = float(json_string["loan_amount"])
     new_json_string["loanDuration"] = json_string["loan_duration"]
