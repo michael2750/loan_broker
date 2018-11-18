@@ -37,7 +37,7 @@ class BankXML(object):
         return self.response
 
 
-class bankJSON(object):
+class BankJSON(object):
     def __init__(self):
         self.connection = pika.BlockingConnection(pika.ConnectionParameters(host='datdb.cphbusiness.dk', port='5672'))
         self.channel = self.connection.channel()
@@ -131,7 +131,7 @@ def pluto_bank(json_string):
     response = pluto_bank.call(json_string)
     print(" PLUTOBANK [.] Got %r" % response)
 
-def bankJSON(json_string):
+def bank_json(json_string):
     bank_json = BankJSON()
     response = bank_json.call(json_string)
     print(" BANKJSON [.] Got %r" % response)
@@ -147,7 +147,7 @@ def callback(ch, method, properties, body):
 		if bank == "Banknordic":
 			bankXML(json_string)
 		if bank == "Danskebank":
-			bankJSON(json_string)
+			bank_json(json_string)
 	
 
 channel.basic_consume(callback,
