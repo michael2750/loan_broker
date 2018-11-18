@@ -38,6 +38,8 @@ class BankXML(object):
 
 
 def callback(ch, method, properties, body):
+    json_string = json.loads(body)
+    print(json.dumps(json_string))
     ssn = json_string["ssn"].replace("-","")[:-2]
     cs = json_string["credit_score"]
     loan_amount = json_string["loan_amount"]
