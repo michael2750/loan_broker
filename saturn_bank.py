@@ -12,9 +12,9 @@ app = Flask(__name__)
 body = [
     {
         'ssn': 160578987,
-        'creditScore': 598,
-        'loanAmount': 1000000, 
-        'loanDuration': 360
+        'credit_score': 598,
+        'loan_amount': 1000000, 
+        'loan_duration': 360
     }
 ]
 
@@ -31,9 +31,9 @@ def handle_request(json_string):
 	return data
 
 def calc_interest_rate(body):
-	credit_score = body['creditScore']
-	loan_amount = body['loanAmount']
-	loan_duration = body['loanDuration']
+	credit_score = body['credit_score']
+	loan_amount = body['loan_amount']
+	loan_duration = body['loan_duration']
 	if loan_amount > 1000000:
 		interest_rate = 1
 	else:
