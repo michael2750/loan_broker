@@ -47,7 +47,7 @@ def insert_request(request_ssn, request_loan_amount, request_loan_duration):
 def select_result(request_id):
 	sql_statement = """
 		SELECT
-			interest_rate,
+			interest,
 			ssn
 		FROM
 			requests

@@ -32,7 +32,7 @@ class TestPlutoBank(unittest.TestCase):
         json_string = json.dumps(self.body)
         self.result = handle_callback_body(json_string)
         self.result = json.loads(self.result)
-        self.assertEqual(self.result['interest_rate'], 3.5)
+        self.assertEqual(self.result['interest'], 3.5)
 
 if __name__ == '__main__':
     unittest.main()
