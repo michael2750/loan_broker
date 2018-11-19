@@ -14,7 +14,7 @@ def callback(ch, method, properties, body):
 	json_string = {}
 	print(body)
 	if "<" in str(body) and ">" in str(body):
-		json_string["bankXML"] = json.loads(json.dumps(xmltodict.parse(body)))["LoadResponse"]
+		json_string["bankXML"] = json.loads(json.dumps(xmltodict.parse(body)))["LoanResponse"]
 	if "{" in str(body) and "}" in str(body):
 		new_json_string = json.loads(body)
 		if type(new_json_string["ssn"]) is int:
