@@ -6,6 +6,7 @@ channel = connection.channel()
 
 channel.queue_declare(queue='bank_pluto_translator')
 
+"""
 class PlutoBank(object):
     def __init__(self):
         self.connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
@@ -20,36 +21,21 @@ class PlutoBank(object):
         self.channel.basic_consume(self.on_response, no_ack=True,
                                    queue=self.callback_queue)
 
-    def on_response(self, ch, method, props, body):
-        #if self.corr_id == props.correlation_id:
-        #self.channel_2.basic_publish(exchange='',
-        #              routing_key='hello',
-        #              body=body)
-        self.response = body
-
     def call(self, n):
         self.response = None
         self.channel.basic_publish(exchange='',
                                    routing_key='loan_request',
-                                   properties=pika.BasicProperties(
-                                         reply_to = self.callback_queue
-                                         ),
                                    body=json.dumps(n))
-        while self.response is None:
-            self.connection.process_data_events()
-        return self.response
-
+"""
 
 def callback(ch, method, properties, body):
     global channel
     json_string = json.loads(body)
     print(json.dumps(json_string))
-    pluto_bank = PlutoBank()
-    response = pluto_bank.call(json_string)
-    print(" PLUTOBANK [.] Got %r" % response)
-    channel.basic_publish(exchange='',
-                          routing_key='normalizer',
-                          body=response)
+    self.channel.basic_publish(exchange='',
+                                   routing_key='loan_request',
+                                   body=json.dumps(n))
+
 
 
 
