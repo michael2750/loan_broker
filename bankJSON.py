@@ -1,6 +1,11 @@
 import pika
 import json
 
+connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
+channel = connection.channel()
+
+channel.queue_declare(queue='bankJSON_translator')
+
 class BankJSON(object):
     def __init__(self):
         self.connection = pika.BlockingConnection(pika.ConnectionParameters(host='datdb.cphbusiness.dk', port='5672'))
@@ -36,6 +41,7 @@ class BankJSON(object):
 
 
 def callback(ch, method, properties, body):
+    global channel
     json_string = json.loads(body)
     print(json.dumps(json_string))
     new_json_string = {}
@@ -46,13 +52,10 @@ def callback(ch, method, properties, body):
     bank_json = BankJSON()
     response = bank_json.call(new_json_string)
     print(" BANKJSON [.] Got %r" % response)
+    channel.basic_publish(exchange='',
+                          routing_key='normalizer',
+                          body=response)
 
-
-
-connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
-channel = connection.channel()
-
-channel.queue_declare(queue='bankJSON_translator')
 
 channel.basic_consume(callback,
                       queue='bankJSON_translator',

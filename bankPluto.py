@@ -1,6 +1,11 @@
 import pika
 import json
 
+connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
+channel = connection.channel()
+
+channel.queue_declare(queue='bank_pluto_translator')
+
 class PlutoBank(object):
     def __init__(self):
         self.connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
@@ -36,17 +41,17 @@ class PlutoBank(object):
 
 
 def callback(ch, method, properties, body):
+    global channel
     json_string = json.loads(body)
     print(json.dumps(json_string))
     pluto_bank = PlutoBank()
     response = pluto_bank.call(json_string)
     print(" PLUTOBANK [.] Got %r" % response)
+    channel.basic_publish(exchange='',
+                          routing_key='normalizer',
+                          body=response)
 
 
-connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
-channel = connection.channel()
-
-channel.queue_declare(queue='bank_pluto_translator')
 
 channel.basic_consume(callback,
                       queue='bank_pluto_translator',

@@ -2,6 +2,11 @@ import pika
 import json
 import datetime
 
+connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
+channel = connection.channel()
+
+channel.queue_declare(queue='bankXML_translator')
+
 class BankXML(object):
     def __init__(self):
         self.connection = pika.BlockingConnection(pika.ConnectionParameters(host='datdb.cphbusiness.dk', port='5672'))
@@ -37,6 +42,7 @@ class BankXML(object):
 
 
 def callback(ch, method, properties, body):
+    global channel
     json_string = json.loads(body)
     print(json.dumps(json_string))
     ssn = json_string["ssn"].replace("-","")[:-2]
@@ -51,12 +57,10 @@ def callback(ch, method, properties, body):
                             <loanDuration>{duration}.0 CET</loanDuration>
                             </LoanRequest>""")
     print(" BANKXML [.] Got %r" % response)
+    channel.basic_publish(exchange='',
+                          routing_key='normalizer',
+                          body=response)
 
-
-connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
-channel = connection.channel()
-
-channel.queue_declare(queue='bankXML_translator')
 
 channel.basic_consume(callback,
                       queue='bankXML_translator',
