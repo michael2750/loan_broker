@@ -23,16 +23,17 @@ class TestStringMethods(unittest.TestCase):
     def test_get_ssn(self):
         print("testing handle_callback_body_ssn")
         json_string = json.dumps(self.body)
-        self.result = handle_callback_body(json_string)
+        self.result = handle_request(json_string)
         self.result = json.loads(self.result)
         self.assertEqual(self.result['ssn'], 160578987)
 
     def test_get_interest_rate(self):
         print("testing handle_callback_body_interest_rate")
         json_string = json.dumps(self.body)
-        self.result = handle_callback_body(json_string)
+        self.result = handle_request(json_string)
         self.result = json.loads(self.result)
-        self.assertEqual(self.result['interest_rate'], 3.5)
+        self.assertEqual(self.result['interest_rate'], 3)
+
 
 if __name__ == '__main__':
     unittest.main()
