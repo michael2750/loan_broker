@@ -28,6 +28,7 @@ def start_process(ssn, loan_amount, loan_duration):
     connection.close()
 
 def handle_request(json_string):
+	json_string = json.loads(json_string)[0]
 	ssn = json_string['ssn']
 	loan_amount = json_string['loan_amount']
 	loan_duration = json_string['loan_duration']
