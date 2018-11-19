@@ -6,7 +6,7 @@ from unittest.mock import patch
 parentPath = os.path.abspath("../")
 if parentPath not in sys.path:
     sys.path.insert(0,parentPath)
-from saturn_bank import handle_callback_body
+from saturn_bank import handle_request
 
 class TestStringMethods(unittest.TestCase):
 
