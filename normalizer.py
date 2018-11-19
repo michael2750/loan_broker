@@ -16,7 +16,7 @@ def callback(ch, method, properties, body):
 		json_string["bankXML"] = json.loads(json.dumps(xmltodict.parse(body)))
 	if "{" in body and "}" in body:
 		new_json_string = json.loads(body)
-		if "-" not in new_json_string["ssn"]:
+		if type(new_json_string["ssn"]) is int:
 			json_string["bankJSON"] = new_json_string
 		if len(new_json_string["ssn"]) > 6:
 			json_string["bankPluto"] = new_json_string
