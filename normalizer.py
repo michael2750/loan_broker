@@ -14,10 +14,14 @@ def callback(ch, method, properties, body):
 	json_string = {}
 	if "<" in body and ">" in body:
 		json_string["bankXML"] = json.loads(json.dumps(xmltodict.parse(body)))["LoanResponse"]
+		json_string["bankXML"]["interest_rate"] = float(json_string["bankXML"]["interestRate"])
+		del json_string["bankXML"]["interestRate"]
 	if "{" in body and "}" in body:
 		new_json_string = json.loads(body)
 		if type(new_json_string["ssn"]) is int:
 			json_string["bankJSON"] = new_json_string
+			json_string["bankJSON"]["interest_rate"] = json_string["bankJSON"]["interestRate"]
+			del json_string["bankJSON"]["interestRate"]
 		elif len(new_json_string["ssn"]) > 6:
 			json_string["bankPluto"] = new_json_string
 		else:
