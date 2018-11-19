@@ -23,18 +23,18 @@ class TestLoanHandler (unittest.TestCase):
 
 	def test_handle_request(self):
 		print("---testing handle_request---")
-		result = self.test_id
-		assert result is not None
+		self.result = self.test_id
+		assert self.result is not None
 
 	def test_handle_result_under_progress(self):
 		print("---testing handle_result_under_progress---")
-		result = handle_result(self.test_id)
+		self.result = handle_result(self.test_id)
 		self.assertEquals(result, "under progress")
 
 	def test_handle_result_interest_rate(self):
 		print ("---testing handle_result_interest_rate---")
-		result = handle_result(self.test_id)
-		result = json.loads(result)
+		self.result = handle_result(self.test_id)
+		self.result = json.loads(self.result)
 		#assert result['interest_rate'] is not None
 		pass
 
