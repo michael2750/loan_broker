@@ -12,11 +12,12 @@ channel.queue_declare(queue='normalizer')
 def callback(ch, method, properties, body):
 	global channel
 	json_string = {}
-	if "<" in body and ">" in body:
+	print(body)
+	if "<" in str(body) and ">" in str(body):
 		json_string["bankXML"] = json.loads(json.dumps(xmltodict.parse(body)))["LoanResponse"]
 		json_string["bankXML"]["interest_rate"] = float(json_string["bankXML"]["interestRate"])
 		del json_string["bankXML"]["interestRate"]
-	if "{" in body and "}" in body:
+	if "{" in str(body) and "}" in str(body):
 		new_json_string = json.loads(body)
 		if type(new_json_string["ssn"]) is int:
 			json_string["bankJSON"] = new_json_string
