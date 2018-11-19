@@ -8,7 +8,7 @@ if parentPath not in sys.path:
     sys.path.insert(0,parentPath)
 from pluto_bank import handle_callback_body
 
-class TestStringMethods(unittest.TestCase):
+class TestPlutoBank(unittest.TestCase):
 
     def setUp(self):
         self.body = [
