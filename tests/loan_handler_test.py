@@ -29,7 +29,7 @@ class TestLoanHandler (unittest.TestCase):
 	def test_handle_result_under_progress(self):
 		print("---testing handle_result_under_progress---")
 		self.result = handle_result(self.test_id)
-		self.assertEquals(self.result, "under progress")
+		self.assertEqual(self.result, "under progress")
 
 	def test_handle_result_interest_rate(self):
 		print ("---testing handle_result_interest_rate---")
