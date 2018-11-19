@@ -32,9 +32,9 @@ def callback(ch, method, properties, body):
     global channel
     json_string = json.loads(body)
     print(json.dumps(json_string))
-    self.channel.basic_publish(exchange='',
-                                   routing_key='loan_request',
-                                   body=json.dumps(n))
+    channel.basic_publish(exchange='',
+                        routing_key='loan_request',
+                        body=json.dumps(n))
 
 
 
