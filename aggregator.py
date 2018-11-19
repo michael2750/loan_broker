@@ -24,12 +24,12 @@ def callback(ch, method, properties, body):
 				if lowest_interest:
 					if lowest_interest > bank_dict[key]["interest_rate"]:
 						lowest_interest = bank_dict[key]["interest_rate"]
-						ssn = bank_dict[key]["ssn"]
 						bank = key
 				else:
 					lowest_interest = bank_dict[key]["interest_rate"]
-					ssn = bank_dict[key]["ssn"]
 					bank = key
+				if key = "bankPluto":
+					ssn = bank_dict[key]["ssn"]
 
 		insert_result(ssn, lowest_interest, bank)
 		list_of_dicts = []
