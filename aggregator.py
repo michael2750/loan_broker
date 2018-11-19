@@ -19,16 +19,17 @@ def callback(ch, method, properties, body):
 		lowest_interest = None
 		ssn = None
 		bank = None
-		for x,y in list_of_dicts.items():
-			if lowest_interest:
-				if lowest_interest > y["interest_rate"]:
-					lowest_interest = y["interest_rate"]
-					ssn = y["ssn"]
-					bank = x
-			else:
-				lowest_interest = y["interest_rate"]
-				ssn = y["ssn"]
-				bank = x
+		for bank_dict in list_of_dicts:
+			for key in bank_dict:
+				if lowest_interest:
+					if lowest_interest > bank_dict[key]["interest_rate"]:
+						lowest_interest = bank_dict[key]["interest_rate"]
+						ssn = bank_dict[key]["ssn"]
+						bank = key
+				else:
+					lowest_interest = bank_dict[key]["interest_rate"]
+					ssn = bank_dict[key]["ssn"]
+					bank = key
 
 		insert_result(ssn, lowest_interest, bank)
 		list_of_dicts = []
