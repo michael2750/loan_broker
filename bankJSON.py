@@ -1,7 +1,5 @@
 import pika
-import requests
 import json
-import datetime
 
 class BankJSON(object):
     def __init__(self):

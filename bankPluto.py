@@ -1,7 +1,5 @@
 import pika
-import requests
 import json
-import datetime
 
 class PlutoBank(object):
     def __init__(self):

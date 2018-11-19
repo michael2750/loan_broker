@@ -44,11 +44,14 @@ def insert_request(request_ssn, request_loan_amount, request_loan_duration):
 	con.close()
 	return value
 
+
+
 def select_result(request_id):
 	sql_statement = """
 		SELECT
 			interest,
-			ssn
+			ssn,
+			bank
 		FROM
 			requests
 		WHERE

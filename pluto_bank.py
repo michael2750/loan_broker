@@ -23,7 +23,7 @@ def callback(ch, method, properties, body):
 	data = {'ssn': ssn, 'interest_rate': interest_rate}
 	json_string = json.dumps(data)
 	channel.basic_publish(exchange='',
-						routing_key='loan_receiver',
+						routing_key='normalizer',
 						body=json_string)
 	print(" [x] Sent", json_string)
 

@@ -1,5 +1,4 @@
 import pika
-import requests
 import json
 import datetime
 
