@@ -56,6 +56,9 @@ def callback(ch, method, properties, body):
         if bank == "Amagerbanken":
             r = requests.post(url = "http://159.65.116.24:5000/request", json = json_string)
             print(r.text)
+            channel.basic_publish(exchange='',
+                          routing_key='normalizer',
+                          body=r.text)
         if bank == "Nordea":
             channel.basic_publish(exchange='',
                           routing_key='bank_pluto_translator',
