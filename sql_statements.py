@@ -44,7 +44,7 @@ def insert_request(request_ssn, request_loan_amount, request_loan_duration):
 	con.close()
 	return value
 
-def insert_result(id, interest, bank):
+def insert_result(ssn, interest, bank):
 	sql_statement = """
 		update
 			requests
