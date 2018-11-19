@@ -55,7 +55,9 @@ def insert_result(ssn, interest, bank):
 			ssn = :ssn
 	"""
 	con = make_engine()
-	con.execute(text(sql_statement), interest=interest, bank=bank, ssn=ssn)
+	sql_statement = text(sql_statement)
+	print(sql_statement)
+	con.execute(sql_statement, interest=interest, bank=bank, ssn=ssn)
 	con.close()
 
 
