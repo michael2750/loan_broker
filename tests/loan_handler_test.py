@@ -24,7 +24,7 @@ class TestLoanHandler (unittest.TestCase):
 		print("testing handle_request")
 		json_string = json.dumps(self.body)
 		result = handle_request(json_string)
-		assert test_id is not None
+		assert result is not None
 
 	def test_handle_result(self):
 		pass
