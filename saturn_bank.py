@@ -21,7 +21,7 @@ body = [
 @app.route('/request', methods=['POST'])
 def get_request():
 	json_string = request.get_json()
-	ssn = json_string['ssn'][:7]
+	ssn = json_string['ssn'][:6]
 	interest_rate = calc_interest_rate(json_string)
 	data = {'ssn': ssn, 'interest_rate': interest_rate}
 	return json.dumps(data)
