@@ -34,7 +34,7 @@ def callback(ch, method, properties, body):
     print(json.dumps(json_string))
     channel.basic_publish(exchange='',
                         routing_key='loan_request',
-                        body=json.dumps(n))
+                        body=json.dumps(json_string))
 
 
 
