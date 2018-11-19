@@ -5,7 +5,7 @@ from sql_statements import insert_result
 connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
 channel = connection.channel()
 
-list_of_dicts = {}
+list_of_dicts = []
 
 
 channel.queue_declare(queue='aggregator')
@@ -31,7 +31,7 @@ def callback(ch, method, properties, body):
 				bank = x
 
 		insert_result(ssn, lowest_interest, bank)
-		list_of_dicts = {}
+		list_of_dicts = []
 
 
 
