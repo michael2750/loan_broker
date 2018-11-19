@@ -1,25 +1,38 @@
-import os
-import flaskr
+import pika
 import unittest
-import tempfile
+import json
+import os, sys
+from unittest.mock import patch
+parentPath = os.path.abspath("../")
+if parentPath not in sys.path:
+    sys.path.insert(0,parentPath)
+from saturn_bank import handle_callback_body
 
-class FlaskrTestCase(unittest.TestCase):
+class TestStringMethods(unittest.TestCase):
 
     def setUp(self):
-        self.db_fd, flaskr.app.config['DATABASE'] = tempfile.mkstemp()
-        flaskr.app.testing = True
-        self.app = flaskr.app.test_client()
-        with flaskr.app.app_context():
-            flaskr.init_db()
+        self.body = [
+            {
+                'ssn': 160578987,
+                'credit_score': 598,
+                'loan_amount': 1000000, 
+                'loan_duration': 360
+            }
+        ]
 
-    def tearDown(self):
-        os.close(self.db_fd)
-        os.unlink(flaskr.app.config['DATABASE'])
+    def test_get_ssn(self):
+        print("testing handle_callback_body_ssn")
+        json_string = json.dumps(self.body)
+        self.result = handle_callback_body(json_string)
+        self.result = json.loads(self.result)
+        self.assertEqual(self.result['ssn'], 160578987)
 
-    def test_empty_db(self):
-        rv = self.app.post('/')
-        assert b'No entries here so far' in rv.data
+    def test_get_interest_rate(self):
+        print("testing handle_callback_body_interest_rate")
+        json_string = json.dumps(self.body)
+        self.result = handle_callback_body(json_string)
+        self.result = json.loads(self.result)
+        self.assertEqual(self.result['interest_rate'], 3.5)
 
 if __name__ == '__main__':
     unittest.main()
-
