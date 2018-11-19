@@ -57,6 +57,7 @@ def insert_result(ssn, interest, bank):
 	con = make_engine()
 	sql_statement = text(sql_statement)
 	print(sql_statement)
+	print(f"ssn: {ssn}, interest: {interest}, bank: {bank}")
 	con.execute(sql_statement, interest=interest, bank=bank, ssn=ssn)
 	con.close()
 
