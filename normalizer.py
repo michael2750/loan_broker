@@ -18,7 +18,7 @@ def callback(ch, method, properties, body):
 		new_json_string = json.loads(body)
 		if type(new_json_string["ssn"]) is int:
 			json_string["bankJSON"] = new_json_string
-		if len(new_json_string["ssn"]) > 6:
+		elif len(new_json_string["ssn"]) > 6:
 			json_string["bankPluto"] = new_json_string
 		else:
 			json_string["saturnBank"] = new_json_string
