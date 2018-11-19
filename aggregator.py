@@ -28,7 +28,7 @@ def callback(ch, method, properties, body):
 				else:
 					lowest_interest = bank_dict[key]["interest_rate"]
 					bank = key
-				if key = "bankPluto":
+				if key == "bankPluto":
 					ssn = bank_dict[key]["ssn"]
 
 		insert_result(ssn, lowest_interest, bank)
