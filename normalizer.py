@@ -14,7 +14,7 @@ def callback(ch, method, properties, body):
 	json_string = {}
 	print(body)
 	if "<" in str(body) and ">" in str(body):
-		json_string["bankXML"] = json.loads(json.dumps(xmltodict.parse(body)))
+		json_string["bankXML"] = json.loads(json.dumps(xmltodict.parse(body)))["LoadResponse"]
 	if "{" in str(body) and "}" in str(body):
 		new_json_string = json.loads(body)
 		if type(new_json_string["ssn"]) is int:
@@ -22,7 +22,7 @@ def callback(ch, method, properties, body):
 		elif len(new_json_string["ssn"]) > 6:
 			json_string["bankPluto"] = new_json_string
 		else:
-			json_string["saturnBank"] = new_json_string
+			json_string["bankSaturn"] = new_json_string
 
 	channel.basic_publish(exchange='',
 						routing_key='aggregator',
