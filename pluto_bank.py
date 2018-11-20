@@ -20,12 +20,12 @@ def callback(ch, method, properties, body):
 	print(" [x] Received %r" % body)
 	json_string = handle_callback_body(body)
 	channel.basic_publish(exchange='',
-						routing_key='loan_receiver',
+						routing_key='normalizer',
 						body=json_string)
 	print(" [x] Sent", json_string)
 
 def handle_callback_body(body):
-	body = json.loads(body)[0]
+	body = json.loads(body)
 	interest_rate = calc_interest_rate(body)
 	ssn = body['ssn']
 	data = {'ssn': ssn, 'interest': interest_rate}

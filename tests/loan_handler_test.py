@@ -11,14 +11,14 @@ from loan_handler import handle_request, handle_result
 class TestLoanHandler (unittest.TestCase):
 
 	def setUp(self):
-		self.body = [
-			{
-				'ssn': 160578987,
-				'loan_amount': 1000000, 
-				'loan_duration': 360
-			}
-		]
+		self.body = {
+			'ssn': '160578-9872',
+			'loan_amount': 1000000, 
+			'loan_duration': 360,
+		}
+
 		json_string = json.dumps(self.body)
+		json_string = json.loads(json_string)
 		self.test_id = handle_request(json_string)
 
 	def test_handle_request(self):
@@ -33,10 +33,9 @@ class TestLoanHandler (unittest.TestCase):
 
 	def test_handle_result_interest_rate(self):
 		print ("---testing handle_result_interest_rate---")
-		self.result = handle_result(self.test_id)
-		#self.result = json.loads(self.result)
-		#assert result['interest'] is not None
-		pass
+		result = handle_result(self.test_id)
+		result = json.loads(result)
+		assert result['interest'] is not None
 
 if __name__ == '__main__':
 	unittest.main()

@@ -11,14 +11,12 @@ from saturn_bank import handle_request
 class TestStringMethods(unittest.TestCase):
 
     def setUp(self):
-        self.body = [
-            {
-                'ssn': 160578987,
-                'credit_score': 598,
-                'loan_amount': 1000000, 
-                'loan_duration': 360
-            }
-        ]
+        self.body = {
+            'ssn': '160578-9872',
+            'credit_score': 598,
+            'loan_amount': 1000000, 
+            'loan_duration': 360
+        }
 
     def test_get_ssn(self):
         print("testing handle_callback_body_ssn")
@@ -33,7 +31,6 @@ class TestStringMethods(unittest.TestCase):
         self.result = handle_request(json_string)
         self.result = json.loads(self.result)
         self.assertEqual(self.result['interest_rate'], 3)
-
 
 if __name__ == '__main__':
     unittest.main()

@@ -44,11 +44,30 @@ def insert_request(request_ssn, request_loan_amount, request_loan_duration):
 	con.close()
 	return value
 
+def insert_result(ssn, interest, bank):
+	sql_statement = """
+		update
+			requests
+		set
+			interest = :interest,
+			bank = :bank
+		where
+			ssn = :ssn
+	"""
+	con = make_engine()
+	sql_statement = text(sql_statement)
+	print(sql_statement)
+	print(f"ssn: {ssn}, interest: {interest}, bank: {bank}")
+	con.execute(sql_statement, interest=interest, bank=bank, ssn=ssn)
+	con.close()
+
+
 def select_result(request_id):
 	sql_statement = """
 		SELECT
 			interest,
-			ssn
+			ssn,
+			bank
 		FROM
 			requests
 		WHERE
