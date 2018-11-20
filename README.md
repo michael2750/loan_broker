@@ -1,11 +1,9 @@
 ## System Integration: Loan Broker project
 
-###### Group 7: Michael, Nicolai, Tim, Ørvur og Laura
-
-
+##### Group 7: Michael, Nicolai, Tim, Ørvur og Laura
 
 #
-#### Documentation
+### Documentation
 
 ##### Get credit score
 This module contacts the credit bureau with the given ssn number and then takes the returned credit score number and sends it to the queue.
@@ -21,3 +19,23 @@ The “get banks” module waits on the queue “rule base” for new data. When
 ##### Translator
 Our translator gets the data and checks for which banks it have to be send to.
 Our modules use JSON so we only have to convert our data for the XML bank. If we get the normal HTTP bank we just send it as a normal endpoint. If we get the XML bank then we convert our JSON to XML and send it with rabbitMQ. For the two other banks we use our JSON and send it with rabbitMQ.
+
+##### First bank (HTTP)
+Our HTTP bank got an endpoint where it takes all the data from the body. This bank uses JSON for data. It takes all the data from the body out and calculates the rate for the loan request and then returns the data back so we can use it. The data it returns is also JSON.
+
+##### Second bank (RabbitMQ)
+This bank uses RabbitMQ for data transferring and JSON as structure for data. This bank consumes its data from a queue called “loan_request”. It takes the data out from the JSON and calculates the interest rate for the given data. It then takes the data and converts it into JSON and puts it on a queue called “normalizer”.
+
+##### Normalizer
+This module consumes data from the queue called “normalizer”. With the given data it checks if the data is XML or JSON. It then takes the data and converts all the values to JSON and publishes the data on the queue called “aggregator”.
+
+##### Aggregator
+This module consumes from the queue called “aggregator”. It checks for which answer gave the lowest interest rate. It then takes only the lowest interest banks data and inserts it into our database. We then have a row in the database with the ssn number, loan amount, loan duration, loan interest and bank name.
+
+#
+### Bottlenecks
+Bottlenecks can happen in all big systems with data transferring and handling. Our system is build with a lot of small modules which makes it easier to spot the bottlenecks and makes it easier to handle the bottlenecks. A Lot of our modules make calculations with the data or converts data which can take some time to do if enough requests are being made.
+A place where a bottleneck could happen is in our normalizer module. This module gets data from all our banks which can make a lot of small jobs. Since we have queues from RabbitMQ does the requests not get deleted but the queue will keep getting bigger if the normalizer does not work faster than requests get in.
+With RabbitMQ and the way the whole project is built, the solution to fix this problem is easy. Since our modules just takes the data from the queue with the given name and our modules are small and only does a small part of the job, we are able to just make another instance of our module. Instead of just using 1 instance of our normalizer will we make 2 (or more if needed). Both of the instances will keep consuming from the queue so the job will be done twice as fast. Since our modules got a really low coupling, we are able to make this fix without changing anything. The only coupling between the modules are the queues we made between them. The modules does not know how the data they get are made, they just consume what the queue gives them. That way we are able to make more instances without making any problems for the other modules and so we can keep an eye on our RabbitMQ queues and see which ones are behind and just make an instance more.
+
+Bottlenecks we don’t have any way to fix will be all services outside what we made. If for example we get more requests than what the credit bureau is able to handle, the rest of our system will also be slow. We do not control the banks either (half of them if we see them as the school project). So even though our system easily can be scaled and easily can fix bottlenecks we  are not able to fix things outside our own systems.
