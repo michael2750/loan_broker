@@ -14,7 +14,7 @@ class TestLoanHandler (unittest.TestCase):
 		self.body = {
 			'ssn': '160578-9872',
 			'loan_amount': 1000000, 
-			'loan_duration': 360,
+			'loan_duration': 360
 		}
 
 		json_string = json.dumps(self.body)
