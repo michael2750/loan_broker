@@ -20,7 +20,7 @@ class TestLoanHandler (unittest.TestCase):
 		self.json_string = json.dumps(self.body)
 		self.json_string = json.loads(self.json_string)
 		self.test_id = handle_request(self.json_string)
-		self.reuqest_result = handle_result(self.test_id)
+		self.request_result = handle_result(self.test_id)
 
 	def test_handle_request(self):
 		print("---testing handle_request---")
