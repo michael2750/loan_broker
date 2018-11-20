@@ -38,6 +38,7 @@ def handle_request(json_string):
 
 def handle_result(request_id):
 	result = select_result(request_id)
+	print(result)
 	if result['interest']:
 		return json.dumps(result)
 	else:
