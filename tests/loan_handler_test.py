@@ -11,13 +11,12 @@ from loan_handler import handle_request, handle_result
 class TestLoanHandler (unittest.TestCase):
 
 	def setUp(self):
-		self.body = [
-			{
-				'ssn': 160578987,
-				'loan_amount': 1000000, 
-				'loan_duration': 360
-			}
-		]
+		self.body = {
+			'ssn': 160578987,
+			'loan_amount': 1000000, 
+			'loan_duration': 360
+		}
+		
 		json_string = json.dumps(self.body)
 		self.test_id = handle_request(json_string)
 
