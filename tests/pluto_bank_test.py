@@ -12,7 +12,7 @@ class TestPlutoBank(unittest.TestCase):
 
     def setUp(self):
         self.body = {
-            'ssn': 160578987,
+            'ssn': '160578-9871',
             'credit_score': 598,
             'loan_amount': 1000000, 
             'loan_duration': 360
@@ -30,7 +30,7 @@ class TestPlutoBank(unittest.TestCase):
         json_string = json.dumps(self.body)
         self.result = handle_callback_body(json_string)
         self.result = json.loads(self.result)
-        self.assertEqual(self.result['interest_rate'], 3.5)
+        self.assertEqual(self.result['interest'], 3.5)
 
 if __name__ == '__main__':
     unittest.main()
