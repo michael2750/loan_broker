@@ -16,8 +16,9 @@ class TestLoanHandler (unittest.TestCase):
 			'loan_amount': 1000000, 
 			'loan_duration': 360
 		}
-		
+
 		json_string = json.dumps(self.body)
+		json_string = json.loads(json_string)
 		self.test_id = handle_request(json_string)
 
 	def test_handle_request(self):
