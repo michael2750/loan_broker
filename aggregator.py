@@ -46,7 +46,7 @@ def thread_method(threadname, list_of_dicts):
 	print(' [*] Waiting for messages. To exit press CTRL+C')
 	channel.start_consuming()
 
-thread = Thread(target=thread_method, args='thread', list_of_dicts)
+thread = Thread(target=thread_method, args=('thread', list_of_dicts))
 
 ssn_dict = {}
 while True:
