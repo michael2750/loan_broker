@@ -38,7 +38,7 @@ def handle_request(json_string):
 
 def handle_result(request_id):
 	result = select_result(request_id)
-	if result['interest_rate']:
+	if result['interest']:
 		return json.dumps(result)
 	else:
 		return "under progress"
