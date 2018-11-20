@@ -28,7 +28,8 @@ def start_process(ssn, loan_amount, loan_duration):
     connection.close()
 
 def handle_request(json_string):
-	json_string = json.loads(json_string)[0]
+	json_string = json.dumps(json_string)
+	json_string = json.loads(json_string)
 	ssn = json_string['ssn']
 	loan_amount = json_string['loan_amount']
 	loan_duration = json_string['loan_duration']
@@ -37,7 +38,7 @@ def handle_request(json_string):
 
 def handle_result(request_id):
 	result = select_result(request_id)
-	if result['interest_rate']:
+	if result['interest']:
 		return json.dumps(result)
 	else:
 		return "under progress"

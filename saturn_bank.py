@@ -2,21 +2,8 @@ from flask import Flask
 from flask import request
 from flask import render_template
 import json
-import requests
-import logging
-
 
 app = Flask(__name__)
-
-
-body = [
-    {
-        'ssn': 160578987,
-        'credit_score': 598,
-        'loan_amount': 1000000, 
-        'loan_duration': 360
-    }
-]
 
 @app.route('/request', methods=['POST'])
 def get_request():
@@ -25,9 +12,9 @@ def get_request():
 	return json.dumps(data)
 
 def handle_request(body):
-	body = json.loads(body)[0]
+	body = json.loads(body)
 	interest_rate = calc_interest_rate(body)
-	ssn = body['ssn'][:6]
+	ssn = body['ssn']
 	data = {'ssn': ssn, 'interest_rate': interest_rate}
 	json_string = json.dumps(data)
 	return json_string

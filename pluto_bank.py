@@ -25,7 +25,7 @@ def callback(ch, method, properties, body):
 	print(" [x] Sent", json_string)
 
 def handle_callback_body(body):
-	body = json.loads(body)[0]
+	body = json.loads(body)
 	interest_rate = calc_interest_rate(body)
 	ssn = body['ssn']
 	data = {'ssn': ssn, 'interest_rate': interest_rate}

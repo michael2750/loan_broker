@@ -11,14 +11,12 @@ from saturn_bank import handle_request
 class TestStringMethods(unittest.TestCase):
 
     def setUp(self):
-        self.body = [
-            {
-                'ssn': 160578987,
-                'credit_score': 598,
-                'loan_amount': 1000000, 
-                'loan_duration': 360
-            }
-        ]
+        self.body = {
+            'ssn': 160578987,
+            'credit_score': 598,
+            'loan_amount': 1000000, 
+            'loan_duration': 360
+        }
 
     def test_get_ssn(self):
         print("testing handle_callback_body_ssn")
