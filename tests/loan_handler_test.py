@@ -20,7 +20,6 @@ class TestLoanHandler (unittest.TestCase):
 		self.json_string = json.dumps(self.body)
 		self.json_string = json.loads(self.json_string)
 		self.test_id = handle_request(self.json_string)
-		self.request_result = handle_result(self.test_id)
 
 	def test_handle_request(self):
 		print("---testing handle_request---")
@@ -29,13 +28,20 @@ class TestLoanHandler (unittest.TestCase):
 
 	def test_handle_result_under_progress(self):
 		print("---testing handle_result_under_progress---")
-		self.assertEqual(self.request_result, "under progress")
+		self.result_under_proegress = handle_result(self.test_id)
+		self.assertEqual(self.result_under_proegress, "under progress")
 
 	def test_handle_result_interest_rate(self):
 		print ("---testing handle_result_interest_rate---")
 		self.interest_result = handle_result(17)
 		self.result = json.loads(self.interest_result)
 		assert self.result['interest'] is not None
+
+	def test_handle_result_bank(self):
+		print ("---testing handle_result_interest_rate---")
+		self.bank_result = handle_result(17)
+		self.result = json.loads(self.bank_result)
+		assert self.result['bank'] is not None
 
 if __name__ == '__main__':
 	unittest.main()
