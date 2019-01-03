@@ -16,9 +16,9 @@ class HelloWorldService(ServiceBase):
     	if credit_score > 300:
     		bank_list.append("Amagerbanken")
     	if credit_score > 150:
-    		bank_list.append("Nordea")
-    	if credit_score > 0:
     		bank_list.append("Banknordic")
+    	if credit_score > 0:
+    		bank_list.append("Nordea")
     	data = {"banks": bank_list}
     	return data
 

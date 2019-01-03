@@ -32,6 +32,5 @@ class TestStringMethods(unittest.TestCase):
         self.result = json.loads(self.result)
         self.assertEqual(self.result['interest_rate'], 3)
 
-
 if __name__ == '__main__':
     unittest.main()

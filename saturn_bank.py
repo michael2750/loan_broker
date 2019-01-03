@@ -12,12 +12,10 @@ def get_request():
 	return json.dumps(data)
 
 def handle_request(body):
-	body = json.loads(body)
 	interest_rate = calc_interest_rate(body)
 	ssn = body['ssn'][:6]
 	data = {'ssn': ssn, 'interest_rate': interest_rate}
-	json_string = json.dumps(data)
-	return json_string
+	return data
 
 def calc_interest_rate(body):
 	credit_score = body['credit_score']

@@ -22,6 +22,7 @@ def start_process(ssn, loan_amount, loan_duration):
     connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
     channel = connection.channel()
     body = create_body(ssn, loan_amount, loan_duration)
+    print(json.dumps(body))
     channel.basic_publish(exchange='',
                           routing_key='credit_score',
                           body=json.dumps(body))
@@ -33,6 +34,7 @@ def handle_request(json_string):
 	ssn = json_string['ssn']
 	loan_amount = json_string['loan_amount']
 	loan_duration = json_string['loan_duration']
+	start_process(ssn, loan_amount, loan_duration)
 	request_id = insert_request(ssn, loan_amount, loan_duration)
 	return request_id
 
@@ -48,4 +50,4 @@ def create_body(ssn, loan_amount, loan_duration):
 	return body
 
 if __name__ == '__main__':
-	app.run(debug=True,host="0.0.0.0", port=5004)
+	app.run(debug=True,host="0.0.0.0", port=5003)

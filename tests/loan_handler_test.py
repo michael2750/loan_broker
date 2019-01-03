@@ -12,9 +12,13 @@ class TestLoanHandler (unittest.TestCase):
 
 	def setUp(self):
 		self.body = {
+<<<<<<< HEAD
 			'ssn': '160578-9871',
+=======
+			'ssn': '160578-9872',
+>>>>>>> 0e81e45e6bde74f6bc7c1cc205e1507c9b6dc288
 			'loan_amount': 1000000, 
-			'loan_duration': 360,
+			'loan_duration': 360
 		}
 
 		json_string = json.dumps(self.body)
@@ -23,17 +27,18 @@ class TestLoanHandler (unittest.TestCase):
 
 	def test_handle_request(self):
 		print("---testing handle_request---")
-		result = self.test_id
-		assert result is not None
+		self.result = self.test_id
+		assert self.result is not None
 
 	def test_handle_result_under_progress(self):
 		print("---testing handle_result_under_progress---")
-		result = handle_result(self.test_id)
-		self.assertEqual(result, "under progress")
+		self.result = handle_result(self.test_id)
+		self.assertEqual(self.result, "under progress")
 
 	def test_handle_result_interest_rate(self):
 		print ("---testing handle_result_interest_rate---")
 		result = handle_result(self.test_id)
+		print(result)
 		result = json.loads(result)
 		assert result['interest'] is not None
 
