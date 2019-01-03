@@ -20,8 +20,7 @@ class TestStringMethods(unittest.TestCase):
 
     def test_get_ssn(self):
         print("testing handle_callback_body_ssn")
-        json_string = self.body
-        #json_string = json.dumps(self.body)
+        json_string = json.dumps(self.body)
         self.result = handle_request(json_string)
         self.result = json.loads(self.result)
         self.assertEqual(self.result['ssn'], '160578-9872')
