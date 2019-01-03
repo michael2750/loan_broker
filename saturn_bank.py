@@ -18,6 +18,7 @@ def handle_request(body):
 	return data
 
 def calc_interest_rate(body):
+	body = json.loads(body)
 	credit_score = body['credit_score']
 	loan_amount = body['loan_amount']
 	loan_duration = body['loan_duration']
