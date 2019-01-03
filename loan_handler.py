@@ -22,7 +22,6 @@ def start_process(ssn, loan_amount, loan_duration):
     connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
     channel = connection.channel()
     body = create_body(ssn, loan_amount, loan_duration)
-    print(json.dumps(body))
     channel.basic_publish(exchange='',
                           routing_key='credit_score',
                           body=json.dumps(body))
