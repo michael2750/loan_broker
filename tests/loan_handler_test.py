@@ -37,6 +37,7 @@ class TestLoanHandler (unittest.TestCase):
 		self.request = handle_request(self.json_string)
 		time.sleep(5)
 		self.result = handle_result(self.request)
+		print(self.result)
 		self.result = json.loads(self.result)
 		assert self.result['interest'] is not None
 		#self.assertEqual(self.result, "under progress")
