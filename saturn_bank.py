@@ -17,7 +17,7 @@ def handle_request(body):
 	ssn = body['ssn']
 	data = {'ssn': ssn, 'interest_rate': interest_rate}
 	json_string = json.dumps(data)
-	return data
+	return json_string
 
 def calc_interest_rate(body):
 	credit_score = body['credit_score']
