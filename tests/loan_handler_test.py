@@ -33,8 +33,8 @@ class TestLoanHandler (unittest.TestCase):
 
 	def test_handle_result_interest_rate(self):
 		print ("---testing handle_result_interest_rate---")
-		self.result = handle_request(self.json_string)
-		print(self.result)
+		self.request = handle_request(self.json_string)
+		self.result = handle_result(self.request)
 		self.result = json.loads(self.result)
 		assert self.result['interest'] is not None
 
