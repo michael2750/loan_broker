@@ -12,11 +12,7 @@ class TestLoanHandler (unittest.TestCase):
 
 	def setUp(self):
 		self.body = {
-<<<<<<< HEAD
-			'ssn': '160578-9871',
-=======
 			'ssn': '160578-9872',
->>>>>>> 0e81e45e6bde74f6bc7c1cc205e1507c9b6dc288
 			'loan_amount': 1000000, 
 			'loan_duration': 360
 		}
