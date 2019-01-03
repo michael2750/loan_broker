@@ -33,7 +33,6 @@ def handle_callback_body(body):
 	return json_string
 
 def calc_interest_rate(body):
-	body = json.loads(body)
 	credit_score = body['credit_score']
 	loan_amount = body['loan_amount']
 	loan_duration = body['loan_duration']
