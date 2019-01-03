@@ -12,11 +12,7 @@ class TestPlutoBank(unittest.TestCase):
 
     def setUp(self):
         self.body = {
-<<<<<<< HEAD
-            'ssn': '160578-9874',
-=======
             'ssn': '160578-9871',
->>>>>>> 0e81e45e6bde74f6bc7c1cc205e1507c9b6dc288
             'credit_score': 598,
             'loan_amount': 1000000, 
             'loan_duration': 360
