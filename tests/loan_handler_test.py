@@ -2,6 +2,7 @@ import unittest
 import json
 import pika
 import os, sys
+import time
 from unittest.mock import patch
 parentPath = os.path.abspath("../")
 if parentPath not in sys.path:
@@ -34,10 +35,11 @@ class TestLoanHandler (unittest.TestCase):
 	def test_handle_result_interest_rate(self):
 		print ("---testing handle_result_interest_rate---")
 		self.request = handle_request(self.json_string)
+		time.sleep(5)
 		self.result = handle_result(self.request)
-		print(self.result)
 		self.result = json.loads(self.result)
 		assert self.result['interest'] is not None
+		#self.assertEqual(self.result, "under progress")
 
 if __name__ == '__main__':
 	unittest.main()
