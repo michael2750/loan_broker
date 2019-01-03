@@ -67,7 +67,6 @@ def monitor(threadname, ssn_dict):
 			diff = (time_stamp - y).total_seconds()
 			if diff > 2:
 				temp_list = list_of_dicts
-				#list_of_dict = []
 				ssn_dict = {}
 				commit()
 		time.sleep(0.5)
