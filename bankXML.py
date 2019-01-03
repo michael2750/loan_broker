@@ -49,8 +49,8 @@ def callback(ch, method, properties, body):
     cs = json_string["credit_score"]
     loan_amount = json_string["loan_amount"]
     duration = (datetime.datetime.now() + datetime.timedelta(days=json_string["loan_duration"])).strftime("%Y-%m-%d %H:%M:%S")
-    fibonacci_rpc = BankXML()
-    response = fibonacci_rpc.call(f"""<LoanRequest>
+    xml_bank = BankXML()
+    response = xml_bank.call(f"""<LoanRequest>
                             <ssn>{ssn}</ssn>
                             <creditScore>{cs}</creditScore>
                             <loanAmount>{loan_amount}</loanAmount>
