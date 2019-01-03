@@ -23,7 +23,7 @@ class TestStringMethods(unittest.TestCase):
         json_string = json.dumps(self.body)
         self.result = handle_request(json_string)
         self.result = json.loads(self.result)
-        self.assertEqual(self.result['ssn'], 160578-9872)
+        self.assertEqual(self.result['ssn'], '160578-9872')
 
     def test_get_interest_rate(self):
         print("testing handle_callback_body_interest_rate")
